@@ -1,7 +1,24 @@
-let express = require('express');
+const express = require('express');
+const path = require('path');
+const dateFormat = require('dateformat');
+
+const port = 8080;
 let app = express();
 
 express.static.mime.types['wasm'] = 'application/wasm';
-app.use(express.static(__dirname + "/static"))
-port = 8080;
-app.listen(8080);
+
+
+const loggerMiddleware = ((req, res, next) => {
+  const time = dateFormat(now, "yyyy-mm-dd HH:MM:ss")
+  console.log(`${time.toLocaleString}requested ${req.path} from ip ${req.ip}`)
+  next();
+})
+
+app.use([loggerMiddleware, express.static(path.join(__dirname, 'static'))])
+
+app.listen(port, (err) => {
+  if (err) {
+    console.error(err);
+  }
+  console.log(`listening on port ${port}`);
+});
