@@ -1,16 +1,15 @@
 const express = require('express');
 const path = require('path');
-const dateFormat = require('dateformat');
+const { dateFormat } = require('./dateformat.js');
 
 const port = 8080;
 let app = express();
 
 express.static.mime.types['wasm'] = 'application/wasm';
 
-
 const loggerMiddleware = ((req, res, next) => {
-  const time = dateFormat(now, "yyyy-mm-dd HH:MM:ss")
-  console.log(`${time.toLocaleString}requested ${req.path} from ip ${req.ip}`)
+  const time = dateFormat(Date.now(), "yyyy-mm-dd HH:MM:ss")
+  console.log(`${time} ${req.ip} requested ${req.path}`)
   next();
 })
 
