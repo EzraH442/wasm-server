@@ -13,7 +13,8 @@ const loggerMiddleware = ((req, res, next) => {
   next();
 })
 
-app.use([loggerMiddleware, express.static(path.join(__dirname, 'static'))])
+// app.use([loggerMiddleware, express.static(path.join(__dirname, 'static'))])
+app.use(express.static(path.join(__dirname, 'static')))
 
 app.listen(port, (err) => {
   if (err) {
