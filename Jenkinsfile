@@ -1,5 +1,9 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'my label'
+    }
+  }
   environment {
     test_var='test var'
   }
@@ -11,6 +15,7 @@ pipeline {
     }
     stage('build') {
       steps {
+        sh 'echo "env var is $env_var"'
         sh 'docker build -t ezraweb/wasm-server:latest . '
       }
     }
