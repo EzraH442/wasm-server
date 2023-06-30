@@ -10,7 +10,7 @@ pipeline {
       }
     }
     stage('build') {
-      sheps {
+      steps {
         sh 'env var is $test_var'
       }
     }
