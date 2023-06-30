@@ -11,7 +11,7 @@ pipeline {
     }
     stage('build') {
       steps {
-        sh 'echo "env var is $test_var"'
+        sh 'docker build -t ezraweb/wasm-server:latest . '
       }
     }
   }
