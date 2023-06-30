@@ -1,18 +1,27 @@
 pipeline {
   agent any
-  environment {
-    test_var='test var'
-  }
   stages {
     stage('log') {
       steps {
         echo 'starting build'
       }
     }
-    stage('build') {
+    stage('build dev') {
+      when { branch 'dev' }
       steps {
-        sh 'echo "env var is $env_var"'
+        sh 'docker build -t ezraweb/wasm-server:dev . '
+      }
+    }
+    stage('build main') {
+      when { branch 'main' }
+      steps {
         sh 'docker build -t ezraweb/wasm-server:latest . '
+      }
+    }
+    stage('deploy main') {
+      when { branch 'main' }
+      steps {
+        sh 'docker compose -p ezraweb_v3_full start wasm-server'
       }
     }
   }
