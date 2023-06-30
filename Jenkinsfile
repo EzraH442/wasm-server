@@ -21,6 +21,7 @@ pipeline {
     stage('deploy main') {
       when { branch 'main' }
       steps {
+        sh 'docker compose -p ezraweb_v3_full create --force-recreate wasm-server'
         sh 'docker compose -p ezraweb_v3_full start wasm-server'
       }
     }
