@@ -1,9 +1,5 @@
 pipeline {
-  agent {
-    node {
-      label 'node 0'
-    }
-  }
+  agent any
   environment {
     test_var='test var'
   }
