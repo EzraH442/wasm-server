@@ -11,7 +11,7 @@ pipeline {
     }
     stage('build') {
       steps {
-        sh 'env var is $test_var'
+        sh 'echo "env var is $test_var"'
       }
     }
   }
