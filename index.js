@@ -14,7 +14,7 @@ const loggerMiddleware = ((req, res, next) => {
 })
 
 // app.use([loggerMiddleware, express.static(path.join(__dirname, 'static'))])
-app.use(express.static(path.join(__dirname, 'static')))
+app.use('/wasm-test', express.static(path.join(__dirname, 'static')))
 
 app.listen(port, (err) => {
   if (err) {
